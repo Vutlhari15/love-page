@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My Love ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at top, #ffdde1, #ee9ca7);
+      text-align: center;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      margin-top: 30px;
+      font-size: 3em;
+      text-shadow: 0 0 15px #ff4d6d;
+    }
+
+    .message {
+      margin: 30px auto;
+      max-width: 800px;
+      font-size: 1.2em;
+      line-height: 1.6;
+      background: rgba(0,0,0,0.5);
+      padding: 25px;
+      border-radius: 15px;
+      white-space: pre-line;
+      min-height: 150px;
+    }
+
+    .gallery {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin: 30px;
+    }
+
+    .gallery img {
+      width: 250px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      transition: transform 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    .music {
+      margin: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 20px;
+      background: #ff4d6d;
+      color: white;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    button:hover {
+      background: #ff1f4d;
+    }
+
+    .floating-heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 2em;
+      animation: floatUp linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(0.5); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>To My Beautiful Girlfriend ❤️💖</h1>
+
+  <div class="music">
+    <button onclick="playSong('song1')">▶️ Song 1 🎶</button>
+    <button onclick="playSong('song2')">▶️ Song 2 🎧</button>
+  </div>
+
+  <audio id="song1">
+    <source src="song1.mp3.mp4" type="audio/mpeg">
+  </audio>
+
+  <audio id="song2">
+    <source src="song2.mp3.mp4" type="audio/mpeg">
+  </audio>
+
+  <div class="message"></div>
+
+  <div class="gallery">
+    <img src="Nancy.jpeg" alt="Memory 1">
+    <img src="vee.jpeg" alt="Memory 2">
+    <img src="Nancy.jpeg" alt="Memory 3">
+  </div>
+
+  <script>
+    function playSong(id) {
+      const songs = document.querySelectorAll("audio");
+      songs.forEach(song => {
+        song.pause();
+        song.currentTime = 0;
+      });
+      document.getElementById(id).play();
+    }
+
+    const emojis = ['💖','💕','💗','💓','💘','','💞'];
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('floating-heart');
+
+      heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (1.5 + Math.random() * 2) + 'em';
+      heart.style.animationDuration = (4 + Math.random() * 4) + 's';
+
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }
+
+    setInterval(createHeart, 400);
+
+    // YOUR ORIGINAL MESSAGE (UNCHANGED)
+    const text = `Hey Nfarn, Sthaa 🥺❤️  
+I don’t know what’s going on with your love life neh.  
+But since I met you, laid my eyes on you, I was so attracted — till now I’m still attracted, even more because I know you.  
+
+I know how kind you are, how genuine you are, and you’ve been good to me since day one. No one has ever treated me like you did and I acknowledge your effort and everything.  
+
+I’m not a saint, I have my flaws here and there, I’m also human. But I have developed feelings for you even though I’ve been avoiding them, because I’m from a toxic harmful relationship.  
+
+I can’t bottle all these feelings and act as if I don’t feel anything for you. It hurts me when I’m alone, thinking why I didn’t do this or that. I didn’t want to ruin our friendship, but I’m glad I expressed my feelings.  
+
+Just know that kaorata thata ❤️. Being around you brings me peace and joy. I miss you, I miss us 🥺🥺🥺❤️  
+
+🎶 dedicating song one to you cause you bring peace to me  
+🎧 dedicating song two to you cause even if nikbhora just now namina ahi mina kuva mbilu`;
+    let i = 0;
+    const speed = 35;
+    const messageDiv = document.querySelector(".message");
+
+    function typeWriter() {
+      if (i < text.length) {
+        messageDiv.textContent += text.charAt(i);
+        i++;
+
+        let delay = speed;
+        if (text.charAt(i) === "." || text.charAt(i) === ",") delay = 200;
+        if (text.charAt(i) === "\n") delay = 300;
+
+        setTimeout(typeWriter, delay);
+      }
+    }
+
+    setTimeout(typeWriter, 800);
+  </script>
+
+</body>
+</html>
