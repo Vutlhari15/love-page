@@ -41,6 +41,11 @@
       margin: 30px;
     }
 
+    .image-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
     .gallery img {
       width: 250px;
       height: 300px;
@@ -52,6 +57,19 @@
 
     .gallery img:hover {
       transform: scale(1.05);
+    }
+
+    .popup-heart {
+      position: absolute;
+      color: #ff4d6d;
+      font-size: 1.5em;
+      animation: popHeart 1s ease forwards;
+      pointer-events: none;
+    }
+
+    @keyframes popHeart {
+      0% { transform: translateY(0) scale(0.5); opacity: 1; }
+      100% { transform: translateY(-60px) scale(1.2); opacity: 0; }
     }
 
     .music {
@@ -120,21 +138,31 @@
 
   <div class="message"></div>
 
-  <!-- ✅ INVITE BUTTON -->
+  <!-- BUTTON -->
   <button id="inviteBtn" onclick="showInvite()" style="display:none;">
     💌 Tap here
   </button>
 
-  <!-- ✅ INVITE MESSAGE -->
+  <!-- INVITE MESSAGE -->
   <div id="inviteMessage">
-  💖 NAKURANDA NFARN 💖 <br><br>
-  "Lunch at your place / mine?" 🥺❤️
-</div>
+    💖 NAKURANDA NFARN 💖 <br><br>
+    "Lunch at your place / mine?" 🥺❤️
+    nxt week Mond or Tues?
+  </div>
 
+  <!-- IMAGES WITH HEART EFFECT -->
   <div class="gallery">
-    <img src="Nancy.jpeg" alt="Memory 1">
-    <img src="vee.jpeg" alt="Memory 2">
-    <img src="Nancy.jpeg" alt="Memory 3">
+    <div class="image-wrapper" onmouseover="popHearts(this)">
+      <img src="Nancy.jpeg">
+    </div>
+
+    <div class="image-wrapper" onmouseover="popHearts(this)">
+      <img src="vee.jpeg">
+    </div>
+
+    <div class="image-wrapper" onmouseover="popHearts(this)">
+      <img src="Nancy.jpeg">
+    </div>
   </div>
 
   <script>
@@ -147,7 +175,6 @@
       document.getElementById(id).play();
     }
 
-    // ✅ fixed emojis (removed empty one)
     const emojis = ['💖','💕','💗','💓','','','💞'];
 
     function createHeart() {
@@ -165,20 +192,39 @@
 
     setInterval(createHeart, 400);
 
+    function popHearts(container) {
+      for (let i = 0; i < 6; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('popup-heart');
+        heart.innerHTML = '❤️';
+
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.top = Math.random() * 100 + '%';
+
+        container.appendChild(heart);
+        setTimeout(() => heart.remove(), 1000);
+      }
+    }
+
     const text = `Hey Nfarn, Sthaa 🥺❤️  
 I don’t know what’s going on with your love life neh.  
 But since I met you, laid my eyes on you, I was so attracted — till now I’m still attracted, even more because I know you.  
 
 I know how kind you are, how genuine you are, and you’ve been good to me since day one. No one has ever treated me like you did and I acknowledge your effort and everything.  
 
-I’m not a saint, I have my flaws here and there, I’m also human. But I have developed feelings for you even though I’ve been avoiding them,   
+I’m not a saint, I have my flaws here and there, I’m also human. But I have developed feelings for you even though I’ve been avoiding them, 
 
 I can’t bottle all these feelings and act as if I don’t feel anything for you. It hurts me when I’m alone, thinking why I didn’t do this or that. I didn’t want to ruin our friendship, but I’m glad I expressed my feelings.  
 
 Just know that kaorata thata ❤️. Being around you brings me peace and joy. I miss you, I miss us 🥺🥺🥺❤️  
 
 🎶 dedicating song one to you cause you bring peace to me  
-🎧 dedicating song two to you cause even if nikbhora just now namina ahi mina kuva mbilu`;
+🎧 dedicating song two to you cause even if nikbhora just now namina ahi mina kuva mbilu  
+
+Know that you are special to me.  
+If ever after reading all of this you feel or consider to give me a chance, you can press the following button.  
+If not, I guess I will finally accept whatever type of relationship you want with me — I will accept it.  
+THANK YOU ❤️`;
 
     let i = 0;
     const speed = 35;
@@ -195,12 +241,10 @@ Just know that kaorata thata ❤️. Being around you brings me peace and joy. I
 
         setTimeout(typeWriter, delay);
       } else {
-        // ✅ SHOW BUTTON AFTER MESSAGE
         document.getElementById("inviteBtn").style.display = "inline-block";
       }
     }
 
-    // ✅ SHOW INVITE FUNCTION
     function showInvite() {
       document.getElementById("inviteMessage").style.display = "block";
     }
